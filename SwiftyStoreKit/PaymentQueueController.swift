@@ -123,7 +123,9 @@ class PaymentQueueController: NSObject, SKPaymentTransactionObserver {
         assertCompleteTransactionsWasCalled()
         
         let skPayment = SKMutablePayment(product: payment.product)
-        skPayment.applicationUsername = payment.applicationUsername
+        if !payment.applicationUsername.isEmpty {
+            skPayment.applicationUsername = payment.applicationUsername
+        }
         skPayment.quantity = payment.quantity
         
         if #available(iOS 12.2, tvOS 12.2, OSX 10.14.4, *) {
