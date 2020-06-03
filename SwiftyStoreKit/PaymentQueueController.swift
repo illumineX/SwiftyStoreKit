@@ -152,7 +152,12 @@ class PaymentQueueController: NSObject, SKPaymentTransactionObserver {
             return
         }
 
-        paymentQueue.restoreCompletedTransactions(withApplicationUsername: restorePurchases.applicationUsername)
+        var username = restorePurchases.applicationUsername
+        if username?.isEmpty ?? false {
+            username = nil
+        }
+        
+        paymentQueue.restoreCompletedTransactions(withApplicationUsername: username)
 
         restorePurchasesController.restorePurchases = restorePurchases
     }
